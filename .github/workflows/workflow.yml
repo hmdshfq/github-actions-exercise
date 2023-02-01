@@ -1,9 +1,6 @@
-name: first
+name: workflow
 
-on:
-  push:
-    branches:
-      - ch0202
+on: push
 
 jobs:
     job1:
