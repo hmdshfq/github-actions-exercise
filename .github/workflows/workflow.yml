@@ -1,21 +1,33 @@
 name: workflow
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
     job1:
-        name: First job
+        name: Ubuntu Time Check
         runs-on: ubuntu-latest
         steps:
-        - name: Step One
-          uses: actions/checkout@v2
-        - name: Step Two
-          run: env | sort
+        - name: Check Time
+          run: date
     job2:
-        name: Second job
+        name: Windows Time Check
         runs-on: windows-latest
         steps:
-        - name: Step One
-          uses: actions/checkout@v2
-        - name: Step Two
-          run: "Get-ChildItem Env: | Sort-Object Name"
+        - name: Check Time
+          run: "Get-Date"
+    job3:
+        name: Mac OS Time Check
+        runs-on: macos-latest
+        steps:
+        - name: Check Time
+          run: date
+    job4:
+        needs: [job1, job2, job3]
+        name: Ubuntu Uptime Check
+        runs-on: ubuntu-latest
+        steps:
+        - name: Uptime
+          run: uptime
